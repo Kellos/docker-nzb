@@ -1,0 +1,92 @@
+---
+version: "3"
+services:
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    deploy:
+      resources:
+        limits:
+          memory: 4096M
+    environment:
+      - PUID=${uid}
+      - PGID=${gid}
+      - TZ=${tz}
+    volumes:
+      - ${rootConf}/sabnzbd:/config
+      - ${rootDL}:/downloads #optional
+    ports:
+      - 8900:8900
+    restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    environment:
+      - PUID=${uid}
+      - PGID=${gid}
+      - TZ=${tz}
+    volumes:
+      - ${rootConf}/sonarr:/config
+      - ${rootMedia}:/media #optional
+      - ${rootMedia}:/downloads #optional
+    ports:
+      - 8898:8898
+    restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    environment:
+      - PUID=${uid}
+      - PGID=${gid}
+      - TZ=${tz}
+    volumes:
+      - ${rootConf}/radarr:/config
+      - ${rootMedia}:/media #optional
+      - ${rootDL}:/downloads #optional
+    ports:
+      - 8899:8899
+    restart: unless-stopped
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    environment:
+      - PUID=${uid}
+      - PGID=${gid}
+      - TZ=${tz}
+    volumes:
+      - ${rootConf}/lidarr:/config
+      - ${rootMedia}/Music:/media #optional
+      - ${rootDL}:/downloads #optional
+    ports:
+      - 8897:8897
+    restart: unless-stopped
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    environment:
+      - PUID=${uid}
+      - PGID=${gid}
+      - TZ=${tz}
+    volumes:
+      - ${rootConf}/bazarr:/config
+      - ${rootMedia}/Movies:/movies #optional
+      - ${rootMedia}/TV:/tv #optional
+    ports:
+      - 8896:8896
+    restart: unless-stopped
