@@ -16,7 +16,7 @@ services:
       - ${rootConf}/sabnzbd:/config
       - ${rootDL}:/downloads #optional
     ports:
-      - 8900:8900
+      - 8900:8900 # 8080 is default
     restart: unless-stopped
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -34,7 +34,7 @@ services:
       - ${rootMedia}:/media #optional
       - ${rootMedia}:/downloads #optional
     ports:
-      - 8898:8898
+      - 8898:8898 # 8989 is default
     restart: unless-stopped
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -52,7 +52,7 @@ services:
       - ${rootMedia}:/media #optional
       - ${rootDL}:/downloads #optional
     ports:
-      - 8899:8899
+      - 8899:8899 # 7878 is default
     restart: unless-stopped
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
@@ -70,7 +70,7 @@ services:
       - ${rootMedia}/Music:/media #optional
       - ${rootDL}:/downloads #optional
     ports:
-      - 8897:8897
+      - 8897:8897 # 8686 is default
     restart: unless-stopped
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
@@ -88,5 +88,5 @@ services:
       - ${rootMedia}/Movies:/movies #optional
       - ${rootMedia}/TV:/tv #optional
     ports:
-      - 8896:8896
+      - 8896:8896 # 6767 is default
     restart: unless-stopped
