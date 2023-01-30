@@ -32,7 +32,7 @@ services:
     volumes:
       - ${rootConf}/sonarr:/config
       - ${rootMedia}:/media #optional
-      - ${rootMedia}:/downloads #optional
+      - ${rootDL}:/downloads #optional
     ports:
       - 8989:8989 # 8989 is default
     restart: unless-stopped
