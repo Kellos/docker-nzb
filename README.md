@@ -1,4 +1,4 @@
-# docker compose stack for NZB related apps
+# docker compose stack for NZB apps (sabnzbd, sonarr, radarr, lidarr & bazarr)
 
 The **.yml** file contains everything you need for a stack to handle nzb files.<br />
 The **.env** file contains variables that you'll want to set and pass in in Portainer (or however else you chose to do it).<br />
