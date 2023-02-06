@@ -18,6 +18,7 @@ services:
     ports:
       - 8080:8080 # 8080 is default
     restart: unless-stopped
+    network_mode: bridge
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
@@ -36,6 +37,7 @@ services:
     ports:
       - 8989:8989 # 8989 is default
     restart: unless-stopped
+    network_mode: bridge
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -54,6 +56,7 @@ services:
     ports:
       - 7878:7878 # 7878 is default
     restart: unless-stopped
+    network_mode: bridge
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
@@ -72,6 +75,7 @@ services:
     ports:
       - 8686:8686 # 8686 is default
     restart: unless-stopped
+    network_mode: bridge
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -90,3 +94,4 @@ services:
     ports:
       - 6767:6767 # 6767 is default
     restart: unless-stopped
+    network_mode: bridge
