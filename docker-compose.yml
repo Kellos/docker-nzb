@@ -1,3 +1,4 @@
+# Docker Compose file for nzb stack
 version: "3"
 services:
   sabnzbd:
