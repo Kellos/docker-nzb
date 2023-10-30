@@ -70,7 +70,7 @@ services:
       - TZ=${tz}
     volumes:
       - ${rootConf}/lidarr:/config
-      - ${rootMedia}/Music:/media #optional
+      - ${rootMedia}:/media #optional
       - ${rootDL}:/downloads #optional
     ports:
       - 8686:8686 # 8686 is default
@@ -89,8 +89,7 @@ services:
       - TZ=${tz}
     volumes:
       - ${rootConf}/bazarr:/config
-      - ${rootMedia}/Movies:/movies #optional
-      - ${rootMedia}/TV:/tv #optional
+      - ${rootMedia}:/media #optional
     ports:
       - 6767:6767 # 6767 is default
     restart: unless-stopped
