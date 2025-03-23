@@ -1,20 +1,16 @@
 # Docker Compose file for nzb stack
-version: "3"
+---
 services:
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
-    deploy:
-      resources:
-        limits:
-          memory: 2048M
     environment:
       - PUID=${uid}
       - PGID=${gid}
       - TZ=${tz}
     volumes:
       - ${rootConf}/sabnzbd:/config
-      - ${rootDL}:/downloads #optional
+      - ${rootMedia}:/storage #optional
     ports:
       - 8080:8080 # 8080 is default
     restart: unless-stopped
@@ -22,18 +18,13 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
-    deploy:
-      resources:
-        limits:
-          memory: 256M
     environment:
       - PUID=${uid}
       - PGID=${gid}
       - TZ=${tz}
     volumes:
       - ${rootConf}/sonarr:/config
-      - ${rootMedia}:/media #optional
-      - ${rootDL}:/downloads #optional
+      - ${rootMedia}:/storage #optional
     ports:
       - 8989:8989 # 8989 is default
     restart: unless-stopped
@@ -41,18 +32,13 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    deploy:
-      resources:
-        limits:
-          memory: 256M
     environment:
       - PUID=${uid}
       - PGID=${gid}
       - TZ=${tz}
     volumes:
       - ${rootConf}/radarr:/config
-      - ${rootMedia}:/media #optional
-      - ${rootDL}:/downloads #optional
+      - ${rootMedia}:/storage #optional
     ports:
       - 7878:7878 # 7878 is default
     restart: unless-stopped
@@ -60,10 +46,6 @@ services:
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
-    deploy:
-      resources:
-        limits:
-          memory: 256M
     environment:
       - PUID=${uid}
       - PGID=${gid}
@@ -71,7 +53,6 @@ services:
     volumes:
       - ${rootConf}/lidarr:/config
       - ${rootMedia}:/media #optional
-      - ${rootDL}:/downloads #optional
     ports:
       - 8686:8686 # 8686 is default
     restart: unless-stopped
@@ -79,18 +60,26 @@ services:
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
-    deploy:
-      resources:
-        limits:
-          memory: 128M
     environment:
       - PUID=${uid}
       - PGID=${gid}
       - TZ=${tz}
     volumes:
       - ${rootConf}/bazarr:/config
-      - ${rootMedia}:/media #optional
+      - ${rootMedia}:/storage #optional
     ports:
       - 6767:6767 # 6767 is default
     restart: unless-stopped
     network_mode: bridge
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${uid}
+      - PGID=${gid}
+      - TZ=${tz}
+    volumes:
+       - ${rootConf}/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
